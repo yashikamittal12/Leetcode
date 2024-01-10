@@ -1,0 +1,33 @@
+872. Leaf-Similar Trees
+
+class Solution {
+public:
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+        if(root1==NULL && root2==NULL)
+        return true;
+        vector<int> vec1;
+        vector<int> vec2;
+
+        check(root1,vec1);
+        check(root2,vec2);
+
+        if(vec1==vec2)
+        return true;
+        else
+        return false;
+    }
+
+   void check(TreeNode* root , vector<int> &ans)
+    {
+            if(root==NULL)
+            return;
+
+            if(root->left==NULL && root->right==NULL)
+            ans.push_back(root->val);
+
+            check(root->left,ans);
+            check(root->right,ans);
+    
+        
+    }
+};
