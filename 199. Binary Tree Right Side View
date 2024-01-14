@@ -1,0 +1,26 @@
+199. Binary Tree Right Side View
+
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> vec;
+        if(root==NULL)
+        return vec;
+        int level=0;
+
+        check(root,level,vec);
+        return vec;
+    }
+
+    void check(TreeNode* root,int level,vector<int> &vec)
+    {
+        if(root==NULL)
+        return;
+
+        if(level==vec.size())
+        vec.push_back(root->val);
+
+        check(root->right,level+1,vec);
+        check(root->left,level+1,vec);
+    }
+};
