@@ -1,0 +1,29 @@
+236. Lowest Common Ancestor of a Binary Tree
+
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        
+    // this is when we reach to leaf nodes, either the null is returned or the root
+    // for which we have to find lca
+        if(root==NULL || root==p || root==q)
+        {
+            return root;
+        }
+
+        TreeNode* left = lowestCommonAncestor(root->left,p,q);
+        TreeNode* right = lowestCommonAncestor(root->right,p,q);
+
+        // if any one side becomes null then return the other side
+        if(left==NULL)
+        return right;
+
+        else if(right==NULL)
+        return left;
+
+        // this is when both the sides are not NULL then that is Lca of p and q
+        else
+        return root;
+
+    }
+};
