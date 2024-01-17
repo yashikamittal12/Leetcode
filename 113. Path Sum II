@@ -1,0 +1,46 @@
+113. Path Sum II
+
+class Solution {
+public:
+    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+        vector<int> vec;
+        vector<vector<int>> ans;
+        if(root==NULL)
+        return ans;
+        
+        int sum=0;
+        check(root,targetSum,vec,ans,sum);
+        return ans;
+    }
+
+    void check(TreeNode* root,int targetSum,vector<int> &vec,vector<vector<int>> &ans,int sum)
+    {
+        if(root==NULL)
+        return;
+
+        if(root->left==NULL && root->right==NULL)
+        {
+            if(sum+root->val==targetSum)
+            {
+                vec.push_back(root->val);
+                ans.push_back(vec);
+
+            }
+            else
+            {
+                vec.push_back(root->val);
+                sum=sum+root->val;
+            }    
+        }
+        else
+        {
+            vec.push_back(root->val);
+            sum=sum+root->val;
+        }
+
+        check(root->left,targetSum,vec,ans,sum);
+        check(root->right,targetSum,vec,ans,sum);
+        sum=sum-vec.back();
+        vec.pop_back();
+    }
+};
